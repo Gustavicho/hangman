@@ -2,16 +2,13 @@
 
 # Contains the methods to return a valid word
 module DictWords
-  def initialize
-    # arr with all words
-    @words = File.read 'dictionary.txt'
-  end
+  @@Words = File.readlines 'dictionary.txt'
 
   def select_word
-    word = @words.sample
-    select_word unless valid? word
-
-    word
+    loop do
+      word = @@Words.sample.chomp
+      return word if valid? word
+    end
   end
 
   private
