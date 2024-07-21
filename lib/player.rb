@@ -7,7 +7,7 @@ class Player
   def guess
     loop do
       print insert_here
-      play = gets.chomp
+      play = gets.chomp.downcase
 
       return play if valid?(play)
 
