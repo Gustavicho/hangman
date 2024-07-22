@@ -12,7 +12,15 @@ module Displayable
     'The input must contains ONE char length'.colorize :red
   end
 
+  def name_size_error
+    'The name must have 3 to 15 letters'.colorize :red
+  end
+
   def insert_here
     'Insert one letter that you think is correct: '.colorize :blue
+  end
+
+  def insert_name
+    'Insert a name here: '.colorize :yellow
   end
 end
