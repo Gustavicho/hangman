@@ -32,7 +32,7 @@ class Game
   end
 
   def game_end?
-    player.tries_left != 0 || won?
+    player.tries_left.zero? || won?
   end
 
   def won?
