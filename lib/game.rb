@@ -1,26 +1,41 @@
 # frozen_string_literal: true
 
+require_relative 'player'
 # Contains all the game logic including: sequence, verification and result display
 class Game
-  # start()
-  # get a word
-  # play
+  attr_reader :secret_word, :player
 
-  # play(word)
-  # get input
-  # check
-  # show result
-  # repeat
+  def initialize(player_name)
+    @secret_word = SecretWord.new
+    @player = Player.new(player_name)
+  end
 
-  # check(inpt, word)
-  # update where is correct
+  def play
+    until game_end?
+      # show info
+      letter = player.guess
+      case secret_word.contains? letter
+      when true
+        save_guess letter
+      else # when false
+        player.tries_left = -1
+      end
+    end
+  end
 
-  # winner?()
-  # are both equals
+  private
 
-  # wins()
-  # show the result in case u win
+  def save_guess(letter)
+    player.add_at_guesses letter
+  rescue ArgumentError => e
+    puts "#{e}\nTry Again!".colorize :red
+  end
 
-  # lose()
-  # show the result in case u lose
+  def game_end?
+    player.tries_left != 0 || won?
+  end
+
+  def won?
+    player.guessed_letters.all? { |char| secret_word.contains? char }
+  end
 end
