@@ -12,13 +12,22 @@ class SecretWord
   def random_word
     loop do
       word = @words.sample.chomp
-      @word if valid? word
+      if valid? word
+        @word = word
+        break
+      end
     end
   end
 
   # check if the letter have the current letter
   def contains?(letter)
     @word.include? letter
+  end
+
+  # check which letters match & return a string where is correct and where not
+  # need to pass which letters were guessed
+  def display(guessed_letters)
+    @word.split('').map { |char| guessed_letters.include?(char) ? char : '_' }.join(' ')
   end
 
   private
