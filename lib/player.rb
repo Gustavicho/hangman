@@ -21,7 +21,7 @@ class Player
   def guess
     loop do
       print guess_txt
-      letter = gets.chomp
+      letter = $stdin.gets.chomp
       return letter if valid? letter
 
       puts guess_error
@@ -31,7 +31,7 @@ class Player
   # add a letter in the gue'ssed_letters
   # BUT, raise a ArgumentError if the current letter has already been added
   def add_at_guesses(letter)
-    raise ArgumentError, 'This letter has already been used' if letter_used? letter
+    raise ArgumentError, 'ERROR: This letter has already been used' if letter_used? letter
 
     @guessed_letters << letter
   end
