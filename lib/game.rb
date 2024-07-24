@@ -16,14 +16,15 @@ class Game
     until game_end?
       show_info
       letter = player.guess
-      puts letter     # -- remove --
-      case secret_word.contains? letter
-      when true
-        save_guess letter
-      else # when false
-        player.minus_one
+      begin
+        player.add_at_guesses letter
+        player.minus_one unless secret_word.contains? letter
+      rescue ArgumentError => e
+        puts "#{e}\nTry Again!".colorize :red
       end
     end
+
+    show_result
   end
 
   private
@@ -34,10 +35,12 @@ class Game
     puts "Guessed letters: #{player.guessed_letters.join(', ')}"
   end
 
-  def save_guess(letter)
-    player.add_at_guesses letter
-  rescue ArgumentError => e
-    puts "#{e}\nTry Again!".colorize :red
+  def show_result
+    if won?
+      puts "Congratulation!! You guessed the secret word!\n The word was: #{secret_word.word}".colorize :green
+    else
+      puts "Sorry... more lucky next time! The word was: #{secret_word.word}"
+    end
   end
 
   def game_end?

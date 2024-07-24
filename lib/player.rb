@@ -4,8 +4,7 @@ require_relative 'displayable'
 
 # Contains all methods to get the input from the user adn contains all that needs to play: secret_word, hist
 class Player
-  attr_reader :name, :guessed_letters
-  attr_accessor :tries_left
+  attr_reader :name, :guessed_letters, :tries_left
 
   include Displayable
 
@@ -26,6 +25,12 @@ class Player
 
       puts guess_error
     end
+  end
+
+  # remove one from tries
+  # use when the player gets the letter wrong
+  def minus_one
+    @tries_left -= 1
   end
 
   # add a letter in the gue'ssed_letters
