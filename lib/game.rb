@@ -37,7 +37,7 @@ class Game
 
   def show_result
     if won?
-      puts "Congratulation!! You guessed the secret word!\n The word was: #{secret_word.word}".colorize :green
+      puts "Congratulation!! You guessed the secret word!\nThe word was: #{secret_word.word}".colorize :green
     else
       puts "Sorry... more lucky next time! The word was: #{secret_word.word}"
     end
